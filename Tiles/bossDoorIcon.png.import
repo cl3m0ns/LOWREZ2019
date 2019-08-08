@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall.png-2fddbb470aade516b6b21a359e75de54.stex"
+path="res://.import/bossDoorIcon.png-09d882d9dcec851d91796a237e004790.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/wall.png"
-dest_files=[ "res://.import/wall.png-2fddbb470aade516b6b21a359e75de54.stex" ]
+source_file="res://Tiles/bossDoorIcon.png"
+dest_files=[ "res://.import/bossDoorIcon.png-09d882d9dcec851d91796a237e004790.stex" ]
 
 [params]
 
