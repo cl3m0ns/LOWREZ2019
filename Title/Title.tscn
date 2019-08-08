@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Title/Title.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Floor.tscn" type="PackedScene" id=2]
@@ -9,9 +9,9 @@
 [ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=7]
 [ext_resource path="res://Enemies/meatball.png" type="Texture" id=8]
 [ext_resource path="res://Title/credits.png" type="Texture" id=9]
-[ext_resource path="res://black.png" type="Texture" id=10]
+[ext_resource path="res://TransAnim.tscn" type="PackedScene" id=10]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "move"
 length = 0.5
 loop = true
@@ -28,8 +28,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "move"
+[sub_resource type="Animation" id=2]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -77,37 +76,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "fade in"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "fade out"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Title" type="Node2D"]
@@ -170,7 +138,7 @@ one_shot = true
 autostart = true
 
 [node name="Chef1Anim" type="AnimationPlayer" parent="."]
-anims/move = SubResource( 2 )
+anims/move = SubResource( 1 )
 
 [node name="Chef1" type="Sprite" parent="."]
 position = Vector2( 10, 43 )
@@ -180,7 +148,7 @@ frame = 1
 
 [node name="SnailPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Snail")
-anims/move = SubResource( 1 )
+anims/move = SubResource( 2 )
 
 [node name="Snail" type="Sprite" parent="."]
 position = Vector2( 54, 44 )
@@ -213,20 +181,13 @@ visible = false
 texture = ExtResource( 9 )
 centered = false
 
-[node name="Transition" type="Sprite" parent="."]
-texture = ExtResource( 10 )
-centered = false
-
-[node name="TransAnim" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Transition")
-"anims/fade in" = SubResource( 6 )
-"anims/fade out" = SubResource( 5 )
+[node name="TransAnim" parent="." instance=ExtResource( 10 )]
 
 [node name="AnyKeyTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
 [node name="ClemTime" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 autostart = true
