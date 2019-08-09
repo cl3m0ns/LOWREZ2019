@@ -8,14 +8,16 @@ enum {
 	MOVE,
 	CHASE
 }
-
+var hp = 3
 var player = null
 
 var dirChoose = [Vector2.RIGHT, Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2(1,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1)]
-
 const SPEED = 20
 var state = IDLE
 
+var bloodSplatter = preload("res://Explosion/DeathSplatter.tscn")
+var death = preload("res://Enemies/DeadEnemies.tscn")
+var deathName = "Fly"
 func _ready():
 	set_physics_process(false)
 	if get_parent().has_node("Player"):
@@ -26,7 +28,6 @@ func _ready():
 func _physics_process(delta):
 	if player != null:
 		var distance2Hero = get_global_position().distance_to(player.get_global_position())
-		print(distance2Hero)
 		if(distance2Hero < 20): 
 			state = CHASE
 		else:
@@ -61,3 +62,14 @@ func _on_StateTimer_timeout():
 	$StateTimer.wait_time = choose([0.25, 0.5, 0.75])
 	if state != CHASE:
 		state = choose([IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR])
+
+func do_death():
+	var boom = bloodSplatter.instance()
+	boom.set_position(position)
+	get_parent().add_child(boom)
+	var dead = death.instance()
+	dead.set_position(position)
+	dead.deathName = "Fly"
+	get_parent().get_node("DeadEnemies").add_child(dead)
+	queue_free()
+	pass

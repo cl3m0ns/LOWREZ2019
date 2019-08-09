@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
+var TYPE = "BULLET"
 const speed = 50
 var moveDir = Vector2.ZERO
+var canHurt = true
 var deathAnim = preload("res://Explosion/Explosion.tscn")
 # Declare member variables here. Examples:
 # var a = 2
@@ -15,6 +17,9 @@ func _ready():
 func _physics_process(delta):
 	var movement = moveDir.normalized() * speed * delta
 	var collision_info = move_and_collide(movement)
+	
+	damage_loop()
+	
 	if collision_info:
 		explode_and_die()
 	
@@ -28,3 +33,12 @@ func explode_and_die():
 	get_parent().add_child(boom)
 	queue_free()
 	
+
+func damage_loop():
+	for body in $Hitbox.get_overlapping_bodies():
+		if body.get("TYPE") == "ENEMY" && canHurt:
+			print("hurting someone")
+			canHurt = false
+			body.hp = body.hp -1
+			if body.hp <= 0:
+				body.do_death()

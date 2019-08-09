@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Enemies/Fly.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/flythingy.png" type="Texture" id=2]
@@ -22,6 +22,33 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -4 ), Vector2( 0, -3 ), Vector2( 0, -2 ), Vector2( 0, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Hitbox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -4 ), Vector2( 0, -3 ), Vector2( 0, -2 ), Vector2( 0, -3 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 3.74199, 2.62308 )
 
 [node name="Fly" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -33,7 +60,7 @@ frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, -4 )
+position = Vector2( 0, -3 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -43,4 +70,10 @@ anims/alive = SubResource( 2 )
 [node name="StateTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, -3 )
+shape = SubResource( 3 )
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 # Declare member variables here
 export (int) var speed = 25
-
+var TYPE = "PLAYER"
 var bullet = preload("res://Bullet/Bullet.tscn")
 var moveDir = Vector2.ZERO
 var attackDir = Vector2.ZERO
@@ -19,6 +19,7 @@ var NEXT_STATE = states.idle
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_z_index(1)
 	idle_state()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -184,24 +185,19 @@ func update_walk_sprite():
 
 func update_attack_sprite():
 	var animationStr = "Idle "
-	print("State: ", STATE)
 	if STATE == states.move:
 		animationStr = "Walk "
 	if attackDir.x < 0:
 		$Sprite.flip_h = true
-		print(animationStr+"Side")
 		$AnimationPlayer.play(animationStr+"Side")
 		FACING = facings.left
 	elif attackDir.x > 0:
 		$Sprite.flip_h = false
-		print(animationStr+"Side")
 		$AnimationPlayer.play(animationStr+"Side")
 		FACING = facings.right
 	elif attackDir.y > 0:
-		print(animationStr+"front")
 		$AnimationPlayer.play(animationStr+"Front")
 		FACING = facings.down
 	elif attackDir.y < 0:
-		print(animationStr+"back")
 		$AnimationPlayer.play(animationStr+"Back")
 		FACING = facings.up
