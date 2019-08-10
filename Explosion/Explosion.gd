@@ -1,5 +1,5 @@
 extends Node2D
-
+var TYPE = "EXPLOSION"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

@@ -1,7 +1,7 @@
 extends Camera2D
 
 var oldPos = Vector2(0, 64)
-
+var TYPE = "CAMERA"
 func _ready():
 	$Area.connect("body_entered", self, "body_entered")
 	$Area.connect("body_exited", self, "body_exited")

@@ -20,9 +20,6 @@ func _physics_process(delta):
 	
 	damage_loop()
 	
-	if collision_info:
-		explode_and_die()
-	
 	if $LifeTimer.is_stopped():
 		queue_free()
 		
@@ -42,3 +39,5 @@ func damage_loop():
 			body.hp = body.hp -1
 			if body.hp <= 0:
 				body.do_death()
+		if body != self && body.get("TYPE") != "PLAYER":
+			explode_and_die()
