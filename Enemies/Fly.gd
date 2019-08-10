@@ -92,7 +92,7 @@ func _on_StateTimer_timeout():
 
 func do_knockback():
 	if iframes != 0:
-		move_and_slide(knockDir.normalized() * SPEED * 1.5, Vector2.ZERO)
+		move_and_slide(knockDir.normalized() * SPEED * 2, Vector2.ZERO)
 	else:
 		state = choose(stateChooser)
 
