@@ -12,6 +12,7 @@ var damage = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	explode()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,11 +29,13 @@ func _physics_process(delta):
 		
 
 func explode_and_die():
+	explode()
+	queue_free()
+
+func explode():
 	var boom = deathAnim.instance()
 	boom.set_position(position)
 	get_parent().add_child(boom)
-	queue_free()
-	
 
 func damage_loop():
 	for body in $Hitbox.get_overlapping_bodies():
