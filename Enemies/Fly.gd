@@ -1,26 +1,31 @@
 extends KinematicBody2D
 var TYPE = "ENEMY"
+const SPEED = 20
 
 var moveDir = Vector2.RIGHT
+var oldDir = Vector2.ZERO
+var knockDir = Vector2.ZERO
+
 enum {
 	IDLE,
 	NEW_DIR,
 	MOVE,
-	CHASE
+	CHASE,
+	KNOCKBACK
 }
 var hp = 3
 var player = null
 
 var dirChoose = [Vector2.RIGHT, Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2(1,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1)]
-const SPEED = 20
 var state = IDLE
 var oldState = IDLE
-var oldDir = Vector2.ZERO
 var stateChooser = [IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR]
-
+var deathName = "Fly"
+var iframes = 0
+#resources
 var bloodSplatter = preload("res://Explosion/DeathSplatter.tscn")
 var death = preload("res://Enemies/DeadEnemies.tscn")
-var deathName = "Fly"
+
 func _ready():
 	set_physics_process(false)
 	if get_parent().has_node("Player"):
@@ -31,18 +36,26 @@ func _ready():
 func _physics_process(delta):
 	if player != null:
 		var distance2Hero = get_global_position().distance_to(player.get_global_position())
-		if(distance2Hero < 20): 
+		if(distance2Hero < 20 && state != KNOCKBACK): 
 			state = CHASE
 		elif oldState == CHASE:
 			state = choose(stateChooser)
+	if iframes > 0:
+		iframes -= 1
+		get_node("Sprite").modulate = Color(10,10,10,10)
+	else:
+		get_node("Sprite").modulate = Color(1,1,1,1)
+	
+	
+	do_state()
+	
+	oldState = state
+
+func do_state():
 	match state:
 		IDLE:
-			if oldState != state:
-				print("Idle")
 			pass
 		NEW_DIR:
-			if oldState != state:
-				print("NEW_DIR")
 			moveDir = choose(dirChoose)
 			if moveDir == oldDir:
 				choose(dirChoose)
@@ -51,15 +64,11 @@ func _physics_process(delta):
 			oldDir = moveDir
 			state = choose([IDLE, MOVE, MOVE])
 		MOVE:
-			if oldState != state:
-				print("MOVE")
 			move()
 		CHASE:
-			if oldState != state:
-				print("chase")
 			move_to_player()
-	
-	oldState = state
+		KNOCKBACK:
+			do_knockback()
 
 func move_to_player():
 	var flyPos = get_global_position()
@@ -81,7 +90,23 @@ func _on_StateTimer_timeout():
 	if state != CHASE:
 		state = choose(stateChooser)
 
+func do_knockback():
+	if iframes != 0:
+		move_and_slide(knockDir.normalized() * SPEED * 1.5, Vector2.ZERO)
+	else:
+		state = choose(stateChooser)
+
+func take_damage():
+	if iframes == 0:
+		iframes = 15
+		hp -= 1
+		if hp <= 0:
+			do_death()
+		else:
+			state = KNOCKBACK
+
 func do_death():
+	get_node("Sprite").modulate = Color(10,10,10,10)
 	var boom = bloodSplatter.instance()
 	boom.set_position(position)
 	get_parent().add_child(boom)
@@ -90,4 +115,3 @@ func do_death():
 	dead.deathName = "Fly"
 	get_parent().get_node("DeadEnemies").add_child(dead)
 	queue_free()
-	pass

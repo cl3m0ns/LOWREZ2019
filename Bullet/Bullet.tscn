@@ -6,10 +6,10 @@
 [ext_resource path="res://Bullet/Spawn.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.07292, 2.21428 )
+extents = Vector2( 0.87978, 0.888162 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 2.68419, 2.53601 )
+extents = Vector2( 2.07177, 2.11071 )
 
 [node name="Bullet" type="KinematicBody2D"]
 script = ExtResource( 1 )

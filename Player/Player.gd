@@ -6,7 +6,8 @@ var TYPE = "PLAYER"
 var bullet = preload("res://Bullet/Bullet.tscn")
 var moveDir = Vector2.ZERO
 var attackDir = Vector2.ZERO
-
+var hp = 3
+var damage = 1
 var lastmoveDir = Vector2.ZERO
 
 enum facings { up, down, left, right }
@@ -121,6 +122,7 @@ func attack_loop():
 			myBullet.set_rotation_degrees(0)
 	
 	myBullet.moveDir = attackDir
+	myBullet.damage = damage
 	myBullet.set_position(bulletPos)
 	
 	#add to scene

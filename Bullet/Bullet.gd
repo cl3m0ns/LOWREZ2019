@@ -5,6 +5,7 @@ const speed = 50
 var moveDir = Vector2.ZERO
 var canHurt = true
 var deathAnim = preload("res://Explosion/Explosion.tscn")
+var damage = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -17,7 +18,9 @@ func _ready():
 func _physics_process(delta):
 	var movement = moveDir.normalized() * speed * delta
 	var collision_info = move_and_collide(movement)
-	
+	if collision_info:
+		explode_and_die()
+		
 	damage_loop()
 	
 	if $LifeTimer.is_stopped():
@@ -35,9 +38,7 @@ func damage_loop():
 	for body in $Hitbox.get_overlapping_bodies():
 		if body.get("TYPE") == "ENEMY" && canHurt:
 			print("hurting someone")
+			body.knockDir = body.get_global_position() - get_global_position()
+			body.take_damage()
 			canHurt = false
-			body.hp = body.hp -1
-			if body.hp <= 0:
-				body.do_death()
-		if body != self && body.get("TYPE") != "PLAYER":
 			explode_and_die()
