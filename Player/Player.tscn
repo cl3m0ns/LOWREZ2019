@@ -110,6 +110,17 @@ tracks/0/keys = {
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
+[node name="slime trail" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 2 )
+amount = 10
+lifetime = 0.75
+local_coords = false
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 1 )
+gravity = Vector2( 0, 0 )
+scale_amount = 4.0
+color = Color( 0.152941, 0.376471, 0.337255, 1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 18

@@ -28,7 +28,9 @@ func _physics_process(delta):
 	STATE = NEXT_STATE
 	if STATE == states.idle:
 		idle_state()
+		$"slime trail".emitting = false
 	elif STATE == states.move:
+		$"slime trail".emitting = true
 		move_state()
 
 
