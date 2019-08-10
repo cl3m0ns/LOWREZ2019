@@ -63,4 +63,5 @@ func move_player_into_room():
 
 func body_entered(body):
 	if body.get("TYPE") == "ENEMY":
+		print('body triggered')
 		body.set_physics_process(true)

@@ -14,6 +14,9 @@ var player = null
 var dirChoose = [Vector2.RIGHT, Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2(1,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1)]
 const SPEED = 20
 var state = IDLE
+var oldState = IDLE
+var oldDir = Vector2.ZERO
+var stateChooser = [IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR]
 
 var bloodSplatter = preload("res://Explosion/DeathSplatter.tscn")
 var death = preload("res://Enemies/DeadEnemies.tscn")
@@ -30,19 +33,33 @@ func _physics_process(delta):
 		var distance2Hero = get_global_position().distance_to(player.get_global_position())
 		if(distance2Hero < 20): 
 			state = CHASE
-		else:
-			state = choose([IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR])
-	
+		elif oldState == CHASE:
+			state = choose(stateChooser)
 	match state:
 		IDLE:
+			if oldState != state:
+				print("Idle")
 			pass
 		NEW_DIR:
+			if oldState != state:
+				print("NEW_DIR")
 			moveDir = choose(dirChoose)
-			state = choose([IDLE, MOVE])
+			if moveDir == oldDir:
+				choose(dirChoose)
+			if moveDir == oldDir:
+				choose(dirChoose)
+			oldDir = moveDir
+			state = choose([IDLE, MOVE, MOVE])
 		MOVE:
+			if oldState != state:
+				print("MOVE")
 			move()
 		CHASE:
+			if oldState != state:
+				print("chase")
 			move_to_player()
+	
+	oldState = state
 
 func move_to_player():
 	var flyPos = get_global_position()
@@ -60,8 +77,9 @@ func choose(array):
 
 func _on_StateTimer_timeout():
 	$StateTimer.wait_time = choose([0.25, 0.5, 0.75])
+	print($StateTimer.wait_time)
 	if state != CHASE:
-		state = choose([IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR])
+		state = choose(stateChooser)
 
 func do_death():
 	var boom = bloodSplatter.instance()
