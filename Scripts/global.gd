@@ -2,6 +2,8 @@ extends Node
 
 var map_seed = 0
 
+var DOORS_HIDDEN = true
+
 func _ready():
 	randomize()
 	if !map_seed:
