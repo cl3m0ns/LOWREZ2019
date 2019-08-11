@@ -6,37 +6,69 @@ var TYPE = "PLAYER"
 var bullet = preload("res://Bullet/Bullet.tscn")
 var moveDir = Vector2.ZERO
 var attackDir = Vector2.ZERO
+var knockDir = Vector2.ZERO
+var iframes = 0
+var maxHp = 3
 var hp = 3
 var damage = 1
 var lastmoveDir = Vector2.ZERO
 
 enum facings { up, down, left, right }
-enum states { idle, move }
-
+enum {
+	IDLE,
+	MOVE,
+	KNOCKBACK
+}
 var FACING = facings.right
-var STATE
+var state
 var PREV_STATE
-var NEXT_STATE = states.idle
+var NEXT_STATE = IDLE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_z_index(1)
+	hp = maxHp
+	set_z_index(2)
 	idle_state()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	STATE = NEXT_STATE
-	if STATE == states.idle:
-		idle_state()
-		$"slime trail".emitting = false
-	elif STATE == states.move:
-		$"slime trail".emitting = true
-		move_state()
+	state = NEXT_STATE
+	match state:
+		IDLE:
+			idle_state()
+			$"slime trail".emitting = false
+		MOVE:
+			$"slime trail".emitting = true
+			move_state()
+		KNOCKBACK:
+			do_knockback()
 
+func do_knockback():
+	if iframes != 0:
+		iframes -= 1
+		get_node("Sprite").modulate = Color(10,10,10,10)
+		move_and_slide(knockDir.normalized() * speed * 2, Vector2.ZERO)
+	else:
+		get_node("Sprite").modulate = Color(1,1,1,1)
+		NEXT_STATE = IDLE
 
 func set_last_moveDir():
 	lastmoveDir = moveDir;
 
+func take_damage():
+	if iframes == 0:
+		iframes = 15
+		hp -= 1
+		get_parent().get_node("Camera").update_hp()
+		if hp <= 0:
+			do_death()
+		else:
+			NEXT_STATE = KNOCKBACK
+	print('damage called ', iframes)
+	
+
+func do_death():
+	pass
 
 func get_next_state():
 	var right = Input.is_action_pressed("move_right")
@@ -50,9 +82,9 @@ func get_next_state():
 	var attack_down = Input.is_action_pressed("ui_down")
 	
 	if right || left || up || down:
-		NEXT_STATE = states.move
+		NEXT_STATE = MOVE
 	else:
-		NEXT_STATE = states.idle
+		NEXT_STATE = IDLE
 
 
 
@@ -181,15 +213,15 @@ func update_walk_sprite():
 	elif moveDir.y < 0 && !movingHorizontal:
 		$AnimationPlayer.play("Walk Back")
 		FACING = facings.up
-	elif moveDir.y == 0 && moveDir.x == 0:
-		NEXT_STATE = states.idle
-		PREV_STATE = STATE
+	elif moveDir.y == 0 && moveDir.x == 0 && iframes == 0:
+		NEXT_STATE = IDLE
+		PREV_STATE = state
 	
 ###########################################################
 
 func update_attack_sprite():
 	var animationStr = "Idle "
-	if STATE == states.move:
+	if state == MOVE:
 		animationStr = "Walk "
 	if attackDir.x < 0:
 		$Sprite.flip_h = true

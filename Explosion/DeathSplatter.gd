@@ -6,6 +6,7 @@ var TYPE = "EFFECT"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_z_index(1)
 	$Particles2D.one_shot = true
 	pass # Replace with function body.
 

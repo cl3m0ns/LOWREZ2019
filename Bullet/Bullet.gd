@@ -12,6 +12,7 @@ var damage = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_z_index(1)
 	explode()
 	pass # Replace with function body.
 
@@ -21,7 +22,7 @@ func _physics_process(delta):
 	var collision_info = move_and_collide(movement)
 	if collision_info:
 		explode_and_die()
-		
+	
 	damage_loop()
 	
 	if $LifeTimer.is_stopped():

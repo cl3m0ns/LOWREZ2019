@@ -22,12 +22,14 @@ var oldState = IDLE
 var stateChooser = [IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR]
 var deathName = "Fly"
 var iframes = 0
+var canDamage = 0
 #resources
 var bloodSplatter = preload("res://Explosion/DeathSplatter.tscn")
 var death = preload("res://Enemies/DeadEnemies.tscn")
 
 func _ready():
 	set_physics_process(false)
+	set_z_index(1)
 	if get_parent().has_node("Player"):
 		player = get_parent().get_node("Player")
 	$AnimationPlayer.play('alive')
@@ -46,10 +48,20 @@ func _physics_process(delta):
 	else:
 		get_node("Sprite").modulate = Color(1,1,1,1)
 	
-	
 	do_state()
-	
+	damage_loop()
 	oldState = state
+
+func damage_loop():
+	if canDamage == 0:
+		for body in $Hitbox.get_overlapping_bodies():
+			if body.get("TYPE") == "PLAYER":
+				print("hurting player")
+				body.knockDir = body.get_global_position() - get_global_position()
+				body.take_damage()
+				canDamage = 100
+	else:
+		canDamage -= 1
 
 func do_state():
 	match state:
@@ -86,7 +98,6 @@ func choose(array):
 
 func _on_StateTimer_timeout():
 	$StateTimer.wait_time = choose([0.25, 0.5, 0.75])
-	print($StateTimer.wait_time)
 	if state != CHASE:
 		state = choose(stateChooser)
 

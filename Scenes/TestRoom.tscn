@@ -15,6 +15,7 @@
 [node name="TestRoom" type="Node2D"]
 
 [node name="Doors" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Door_Right" parent="Doors" instance=ExtResource( 1 )]
 position = Vector2( 124, 89 )

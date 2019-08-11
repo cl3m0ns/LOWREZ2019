@@ -18,7 +18,20 @@ func _process(delta):
 	
 	oldPos = global_position
 	check_for_enemies()
-	
+
+func update_hp():
+	var player = get_parent().get_node("Player")
+	var hp = player.hp
+	match hp:
+		1:
+			$hp2.modulate = Color(0,0,0,0)
+			$hp3.modulate = Color(0,0,0,0)
+		2:
+			$hp3.modulate = Color(0,0,0,0)
+		3:
+			$hp1.modulate = Color(1,1,1,1)
+			$hp2.modulate = Color(1,1,1,1)
+			$hp3.modulate = Color(1,1,1,1)
 
 func check_for_enemies():
 	var collisions = $Area.get_overlapping_bodies()
@@ -46,8 +59,6 @@ func move_player_into_room():
 	var player = get_node("../Player")
 	var myPos = get_global_position()
 	var playerPos = player.get_global_position()
-	print("my pos: ", global_position)
-	print("playerPos: ", playerPos)
 	var center = Vector2(myPos.x + 32, myPos.y + 32)
 	print(center)
 	if center.x - playerPos.x > 20:
@@ -63,5 +74,4 @@ func move_player_into_room():
 
 func body_entered(body):
 	if body.get("TYPE") == "ENEMY":
-		print('body triggered')
 		body.set_physics_process(true)

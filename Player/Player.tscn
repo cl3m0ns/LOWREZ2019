@@ -112,6 +112,7 @@ script = ExtResource( 1 )
 
 [node name="slime trail" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 2 )
+z_as_relative = false
 amount = 10
 lifetime = 0.75
 local_coords = false
@@ -143,13 +144,6 @@ __meta__ = {
 "anims/Walk Back" = SubResource( 5 )
 "anims/Walk Front" = SubResource( 6 )
 "anims/Walk Side" = SubResource( 7 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-drag_margin_left = 1.0
-drag_margin_top = 1.0
-drag_margin_right = 1.0
-drag_margin_bottom = 1.0
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.4

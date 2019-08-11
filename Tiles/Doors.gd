@@ -1,5 +1,5 @@
 extends StaticBody2D
-var TYPE = "DOOR"
+var TYPE = "DOOR_TOP"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -8,6 +8,7 @@ var hideDoors = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_z_index(1)
 	hide_doors()
 
 func hide_doors():
