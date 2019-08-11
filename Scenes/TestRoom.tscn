@@ -67,19 +67,19 @@ texture = ExtResource( 8 )
 [node name="DeadEnemies" type="Node" parent="."]
 
 [node name="Meatball" parent="." instance=ExtResource( 9 )]
-position = Vector2( 115, 17 )
+position = Vector2( 80, 115 )
 
 [node name="Fly" parent="." instance=ExtResource( 10 )]
-position = Vector2( 145, 115 )
+position = Vector2( 174, 83 )
 
 [node name="KnifeGuy" parent="." instance=ExtResource( 11 )]
-position = Vector2( 75, 117 )
+position = Vector2( 159, 180 )
 
 [node name="Fly2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 181, 115 )
+position = Vector2( 174, 114 )
 
 [node name="Fly3" parent="." instance=ExtResource( 10 )]
-position = Vector2( 173, 83 )
+position = Vector2( 115, 18 )
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
 position = Vector2( 31, 41 )
