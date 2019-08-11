@@ -74,8 +74,6 @@ func take_damage():
 			do_death()
 		else:
 			NEXT_STATE = KNOCKBACK
-	print('damage called ', iframes)
-	
 
 func do_death():
 	$DeathBoom.emitting = true

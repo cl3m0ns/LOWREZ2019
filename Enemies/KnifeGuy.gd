@@ -1,26 +1,26 @@
 extends KinematicBody2D
 var TYPE = "ENEMY"
-const SPEED = 15
+const SPEED = 18
 
 var moveDir = Vector2.RIGHT
 var oldDir = Vector2.ZERO
 var knockDir = Vector2.ZERO
 
 enum {
-	IDLE,
 	NEW_DIR,
+	ATTACK,
 	MOVE,
 	CHASE,
 	KNOCKBACK
 }
-var hp = 3
+var hp = 4
 var player = null
 
 var dirChoose = [Vector2.RIGHT, Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2(1,1), Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1)]
-var state = IDLE
-var oldState = IDLE
-var stateChooser = [IDLE, MOVE, NEW_DIR, MOVE, NEW_DIR]
-var deathName = "Fly"
+var state = NEW_DIR
+var oldState = NEW_DIR
+var stateChooser = [MOVE, NEW_DIR,]
+var deathName = "KnifeGuy"
 var iframes = 0
 var canDamage = 0
 #resources
@@ -38,7 +38,7 @@ func _ready():
 func _physics_process(delta):
 	if player != null:
 		var distance2Hero = get_global_position().distance_to(player.get_global_position())
-		if(distance2Hero < 20 && state != KNOCKBACK): 
+		if(distance2Hero < 30 && state != KNOCKBACK && state != ATTACK): 
 			state = CHASE
 		elif oldState == CHASE:
 			state = choose(stateChooser)
@@ -68,8 +68,6 @@ func damage_loop():
 
 func do_state():
 	match state:
-		IDLE:
-			pass
 		NEW_DIR:
 			moveDir = choose(dirChoose)
 			if moveDir == oldDir:
@@ -77,21 +75,55 @@ func do_state():
 			if moveDir == oldDir:
 				choose(dirChoose)
 			oldDir = moveDir
-			state = choose([IDLE, MOVE, MOVE])
+			state = MOVE
 		MOVE:
 			move()
 		CHASE:
 			move_to_player()
+		ATTACK:
+			do_attack()
 		KNOCKBACK:
 			do_knockback()
+
+func do_attack():
+	var flyPos = get_global_position()
+	var playerPos = player.get_global_position()
+	var distToPlayer = get_global_position().distance_to(playerPos); 
+	var  moveDir = (playerPos - position).normalized() * SPEED
+	flip_sprite_to_player()
+	move_and_slide(moveDir, Vector2.ZERO)
+	$AnimationPlayer.play("attack")
+	yield($AnimationPlayer, "animation_finished")
+	$AnimationPlayer.play('alive')
+	state = NEW_DIR
+
+func flip_sprite():
+	if moveDir.x >= 0:
+		$Sprite.flip_h = false
+	elif moveDir.x < 0:
+		$Sprite.flip_h = true
+
+func flip_sprite_to_player():
+	var playerPos = player.get_global_position()
+	var ourPos = get_global_position()
+	if playerPos.x > ourPos.x:
+		$Sprite.flip_h = false
+	else:
+		$Sprite.flip_h = true
 
 func move_to_player():
 	var flyPos = get_global_position()
 	var playerPos = player.get_global_position()
+	var distToPlayer = get_global_position().distance_to(playerPos); 
 	var  moveDir = (playerPos - position).normalized() * SPEED
+	print(distToPlayer)
+	if distToPlayer < 12:
+		state = ATTACK
+	flip_sprite_to_player()
 	move_and_slide(moveDir, Vector2.ZERO)
 
 func move():
+	flip_sprite()
 	move_and_slide(moveDir.normalized() *SPEED, Vector2.ZERO)
 
 func choose(array):
@@ -100,7 +132,7 @@ func choose(array):
 
 func _on_StateTimer_timeout():
 	$StateTimer.wait_time = choose([0.25, 0.5, 0.75])
-	if state != CHASE:
+	if state != CHASE && state != ATTACK:
 		state = choose(stateChooser)
 
 func do_knockback():
@@ -125,6 +157,6 @@ func do_death():
 	get_parent().add_child(boom)
 	var dead = death.instance()
 	dead.set_position(position)
-	dead.deathName = "Fly"
+	dead.deathName = "KnifeGuy"
 	get_parent().get_node("DeadEnemies").add_child(dead)
 	queue_free()
