@@ -35,11 +35,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if isDead:
-		alpha -= .01
+		alpha -= .05
 		$Sprite.modulate = Color(1,1,1,alpha)
 	
 	if isDead && $FadePlayerTimer.is_stopped():
-		get_tree().change_scene("res://Title/Title.tscn")
+		get_tree().change_scene("res://restart/restart.tscn")
 	
 	state = NEXT_STATE
 	match state:
