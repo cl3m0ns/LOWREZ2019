@@ -23,15 +23,27 @@ func update_hp():
 	var player = get_parent().get_node("Player")
 	var hp = player.hp
 	match hp:
+		0:
+			$hp.modulate = Color(0,0,0,0)
+			$hp2.modulate = Color(0,0,0,0)
+			$hp3.modulate = Color(0,0,0,0)
+			disable_enemies()
 		1:
 			$hp2.modulate = Color(0,0,0,0)
 			$hp3.modulate = Color(0,0,0,0)
 		2:
 			$hp3.modulate = Color(0,0,0,0)
 		3:
-			$hp1.modulate = Color(1,1,1,1)
+			$hp.modulate = Color(1,1,1,1)
 			$hp2.modulate = Color(1,1,1,1)
 			$hp3.modulate = Color(1,1,1,1)
+
+func disable_enemies():
+	var collisions = $Area.get_overlapping_bodies()
+	
+	for i in collisions:
+		if i.get("TYPE") == "ENEMY":
+			i.set_physics_process(false)
 
 func check_for_enemies():
 	var collisions = $Area.get_overlapping_bodies()

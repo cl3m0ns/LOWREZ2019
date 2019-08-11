@@ -1,6 +1,6 @@
 extends KinematicBody2D
 var TYPE = "ENEMY"
-const SPEED = 20
+const SPEED = 15
 
 var moveDir = Vector2.RIGHT
 var oldDir = Vector2.ZERO
@@ -42,6 +42,9 @@ func _physics_process(delta):
 			state = CHASE
 		elif oldState == CHASE:
 			state = choose(stateChooser)
+	else:
+		set_physics_process(false)
+		
 	if iframes > 0:
 		iframes -= 1
 		get_node("Sprite").modulate = Color(10,10,10,10)
@@ -54,11 +57,12 @@ func _physics_process(delta):
 
 func damage_loop():
 	if canDamage == 0:
-		for body in $Hitbox.get_overlapping_bodies():
-			if body.get("TYPE") == "PLAYER":
+		for body in $Hitbox.get_overlapping_areas():
+			if body.get("TYPE") == "PLAYER_HITBOX":
 				print("hurting player")
-				body.knockDir = body.get_global_position() - get_global_position()
-				body.take_damage()
+				var player = body.get_parent()
+				player.knockDir = player.get_global_position() - get_global_position()
+				player.take_damage()
 				canDamage = 100
 	else:
 		canDamage -= 1
@@ -86,8 +90,7 @@ func move_to_player():
 	var flyPos = get_global_position()
 	var playerPos = player.get_global_position()
 	var  moveDir = (playerPos - position).normalized() * SPEED
-	if (playerPos - position).length() > 5:
-        move_and_slide(moveDir, Vector2.ZERO)
+	move_and_slide(moveDir, Vector2.ZERO)
 
 func move():
 	move_and_slide(moveDir.normalized() *SPEED, Vector2.ZERO)

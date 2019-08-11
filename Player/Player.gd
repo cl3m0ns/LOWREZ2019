@@ -23,6 +23,8 @@ var FACING = facings.right
 var state
 var PREV_STATE
 var NEXT_STATE = IDLE
+var isDead = false
+var alpha = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,6 +34,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if isDead:
+		alpha -= .01
+		$Sprite.modulate = Color(1,1,1,alpha)
+	
+	if isDead && $FadePlayerTimer.is_stopped():
+		get_tree().change_scene("res://Title/Title.tscn")
+	
 	state = NEXT_STATE
 	match state:
 		IDLE:
@@ -61,6 +70,7 @@ func take_damage():
 		hp -= 1
 		get_parent().get_node("Camera").update_hp()
 		if hp <= 0:
+			NEXT_STATE = KNOCKBACK
 			do_death()
 		else:
 			NEXT_STATE = KNOCKBACK
@@ -68,6 +78,9 @@ func take_damage():
 	
 
 func do_death():
+	$DeathBoom.emitting = true
+	$FadePlayerTimer.start()
+	isDead = true
 	pass
 
 func get_next_state():
