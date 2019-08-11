@@ -15,10 +15,10 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	
+
 	blink_any_key()
 	move_bg()
-		
+
 	if $ClemTime.is_stopped() && nextScene:
 		$TransAnim.play("fade in")
 		yield(get_node("TransAnim"), "animation_finished")
@@ -32,7 +32,7 @@ func _input(event):
 			yield(get_node("TransAnim"), "animation_finished")
 			show_clemonades()
 			$TransAnim.play("fade out")
-			
+
 
 func show_clemonades():
 	$ClemTime.start()
@@ -53,7 +53,7 @@ func blink_any_key():
 		elif sprite2.visible:
 			sprite1.visible = true
 			sprite2.visible = false
-		
+
 		$BlinkTimer.start()
 
 func move_bg():
