@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Title/Title.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Floor.tscn" type="PackedScene" id=2]
@@ -6,10 +6,9 @@
 [ext_resource path="res://Title/titlescreen2.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/enemy1.png" type="Texture" id=5]
 [ext_resource path="res://Player/snail hero.png" type="Texture" id=6]
-[ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=7]
-[ext_resource path="res://Enemies/meatball.png" type="Texture" id=8]
-[ext_resource path="res://Title/credits.png" type="Texture" id=9]
-[ext_resource path="res://TransAnim.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/meatball.png" type="Texture" id=7]
+[ext_resource path="res://Title/credits.png" type="Texture" id=8]
+[ext_resource path="res://TransAnim.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "move"
@@ -45,23 +44,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "move"
-length = 0.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 0 ]
-}
-
-[sub_resource type="Animation" id=4]
 resource_name = "move"
 length = 0.6
 loop = true
@@ -156,32 +138,22 @@ texture = ExtResource( 6 )
 hframes = 18
 frame = 7
 
-[node name="chef2Anim" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Chef2Anim")
-anims/move = SubResource( 3 )
-
-[node name="Chef2Anim" type="Sprite" parent="."]
-position = Vector2( 22, 43 )
-texture = ExtResource( 7 )
-hframes = 14
-frame = 3
-
 [node name="meatballAnim" type="AnimationPlayer" parent="."]
 root_node = NodePath("../meatballsprite")
-anims/move = SubResource( 4 )
+anims/move = SubResource( 3 )
 
 [node name="meatballsprite" type="Sprite" parent="."]
-position = Vector2( 37, 45 )
-texture = ExtResource( 8 )
+position = Vector2( 25, 45 )
+texture = ExtResource( 7 )
 hframes = 10
 frame = 5
 
 [node name="Clemonades" type="Sprite" parent="."]
 visible = false
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 centered = false
 
-[node name="TransAnim" parent="." instance=ExtResource( 10 )]
+[node name="TransAnim" parent="." instance=ExtResource( 9 )]
 
 [node name="AnyKeyTimer" type="Timer" parent="."]
 one_shot = true
