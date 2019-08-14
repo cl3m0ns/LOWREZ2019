@@ -12,6 +12,7 @@ var throwingCooldown = 0
 var stateChooser = [IDLE, ATTACK]
 var deathName = "Throwing1"
 var iframes = 0
+var knockDir = Vector2.ZERO
 #resources
 var bloodSplatter = preload("res://Explosion/DeathSplatter.tscn")
 var death = preload("res://Enemies/DeadEnemies.tscn")

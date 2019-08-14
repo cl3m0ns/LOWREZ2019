@@ -8,7 +8,7 @@ func _ready():
 	$Fly.visible = false
 	$KnifeGuy.visible = false
 	$Meatball.visible = false
-	print("dead z, ", get_z_index())
+	$Throwing1.visible = false
 	match deathName:
 		"Fly":
 			$Fly.visible = true
@@ -25,7 +25,11 @@ func _ready():
 			$Meatball/MeatballAnim.play("die")
 			yield($Meatball/MeatballAnim, "animation_finished")
 			set_physics_process(false)
-	pass # Replace with function body.
+		"Throwing1":
+			$Throwing1.visible = true
+			$Throwing1/Throwing1Anim.play("die")
+			yield($Throwing1/Throwing1Anim, "animation_finished")
+			set_physics_process(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
