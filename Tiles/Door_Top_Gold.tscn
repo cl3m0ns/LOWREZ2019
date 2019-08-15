@@ -6,7 +6,7 @@
 [ext_resource path="res://Tiles/bossDoorIcon.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 3.5 )
+extents = Vector2( 5, 2.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5, 1 )
@@ -22,13 +22,9 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 5, 3.5 )
 shape = SubResource( 1 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="bossDoorIcon" type="Sprite" parent="."]
 position = Vector2( 5, 11 )
