@@ -64,7 +64,7 @@ func check_for_enemies():
 			d.hide_doors()
 
 func body_exited(body):
-	if body.get("TYPE") == "ENEMY":
+	if body.get("TYPE") == "ENEMY" || body.get("TYPE") == "PICKUP":
 		body.set_physics_process(false)
 
 func move_player_into_room():
@@ -85,5 +85,5 @@ func move_player_into_room():
 	player.set_position(Vector2(center.x, center.y))
 
 func body_entered(body):
-	if body.get("TYPE") == "ENEMY":
+	if body.get("TYPE") == "ENEMY"|| body.get("TYPE") == "PICKUP":
 		body.set_physics_process(true)

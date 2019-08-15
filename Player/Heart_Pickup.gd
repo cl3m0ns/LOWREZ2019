@@ -1,5 +1,5 @@
 extends Node2D
-
+var TYPE = "PICKUP"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -14,5 +14,5 @@ func _physics_process(delta):
 		if body.get("TYPE") == "PLAYER":
 			if body.hp != body.maxHp:
 				body.hp += 1
-			get_parent().find_node("Camera").update_hp()
-			queue_free()
+				get_parent().find_node("Camera").update_hp()
+				queue_free()
