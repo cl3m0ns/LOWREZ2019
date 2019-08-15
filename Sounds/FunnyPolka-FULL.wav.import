@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FunnyPolka-FULL.wav-60ef605c1f4c5844b1e066dea5ab6642.sample"
+
+[deps]
+
+source_file="res://Sounds/FunnyPolka-FULL.wav"
+dest_files=[ "res://.import/FunnyPolka-FULL.wav-60ef605c1f4c5844b1e066dea5ab6642.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
