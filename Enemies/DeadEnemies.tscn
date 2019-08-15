@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Enemies/DeadEnemies.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/flythingy.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/enemy1.png" type="Texture" id=3]
 [ext_resource path="res://Enemies/meatball.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/enemy2.png" type="Texture" id=5]
+[ext_resource path="res://Enemies/enemy2-2.png" type="Texture" id=6]
+[ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "die"
@@ -70,6 +72,38 @@ tracks/0/keys = {
 "values": [ 7, 8, 9, 10 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "die"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Throwing2Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "die"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Throwing3Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10 ]
+}
+
 [node name="DeadEnemies" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -107,6 +141,8 @@ frame = 9
 anims/die = SubResource( 3 )
 
 [node name="Throwing1" type="Node2D" parent="."]
+editor/display_folded = true
+visible = false
 
 [node name="Throwing1Sprite" type="Sprite" parent="Throwing1"]
 texture = ExtResource( 5 )
@@ -115,3 +151,23 @@ frame = 10
 
 [node name="Throwing1Anim" type="AnimationPlayer" parent="Throwing1"]
 anims/die = SubResource( 4 )
+
+[node name="Throwing2" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Throwing2Sprite" type="Sprite" parent="Throwing2"]
+texture = ExtResource( 6 )
+hframes = 11
+frame = 10
+
+[node name="Throwing2Anim" type="AnimationPlayer" parent="Throwing2"]
+anims/die = SubResource( 5 )
+
+[node name="Throwing3" type="Node2D" parent="."]
+
+[node name="Throwing3Sprite" type="Sprite" parent="Throwing3"]
+texture = ExtResource( 7 )
+hframes = 11
+
+[node name="Throwing3Anim" type="AnimationPlayer" parent="Throwing3"]
+anims/die = SubResource( 6 )

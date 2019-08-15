@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Enemies/ThrowingEnemy.gd" type="Script" id=1]
-[ext_resource path="res://Enemies/enemy2.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/ThrowingEnemy3.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.75964, 1.4668 )
@@ -47,7 +47,7 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 11
-frame = 6
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -10,7 +10,7 @@ var player = null
 var damage = 1
 var throwingCooldown = 0
 var stateChooser = [IDLE, ATTACK]
-var deathName = "Throwing1"
+var deathName = "Throwing3"
 var iframes = 0
 var knockDir = Vector2.ZERO
 #resources
@@ -51,17 +51,9 @@ func do_state():
 func do_bullet():
 	var myBullet = bullet.instance()
 	var bulletPos = Vector2.ZERO
-	var bulletDir = Vector2.RIGHT
-	match $Sprite.flip_h:
-		true:
-			bulletPos = Vector2(position.x -5, position.y + 2)
-			bulletDir = Vector2.LEFT
-			myBullet.set_rotation_degrees(180)
-		false:
-			bulletPos = Vector2(position.x +5, position.y + 2)
-			bulletDir = Vector2.RIGHT
-			myBullet.set_rotation_degrees(0)
-	
+	var bulletDir = Vector2.DOWN
+	myBullet.set_rotation_degrees(90)
+	bulletPos = Vector2(position.x-2, position.y +5)
 	myBullet.moveDir = bulletDir
 	myBullet.damage = damage
 	myBullet.set_position(bulletPos)
@@ -99,7 +91,7 @@ func do_death():
 	get_parent().add_child(boom)
 	var dead = death.instance()
 	dead.set_position(position)
-	dead.deathName = "Throwing1"
+	dead.deathName = "Throwing3"
 	get_parent().get_node("DeadEnemies").add_child(dead)
 	queue_free()
 

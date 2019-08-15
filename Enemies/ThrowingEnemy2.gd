@@ -10,7 +10,7 @@ var player = null
 var damage = 1
 var throwingCooldown = 0
 var stateChooser = [IDLE, ATTACK]
-var deathName = "Throwing1"
+var deathName = "Throwing2"
 var iframes = 0
 var knockDir = Vector2.ZERO
 #resources
@@ -99,7 +99,7 @@ func do_death():
 	get_parent().add_child(boom)
 	var dead = death.instance()
 	dead.set_position(position)
-	dead.deathName = "Throwing1"
+	dead.deathName = "Throwing2"
 	get_parent().get_node("DeadEnemies").add_child(dead)
 	queue_free()
 

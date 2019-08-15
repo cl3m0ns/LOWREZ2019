@@ -9,6 +9,8 @@ func _ready():
 	$KnifeGuy.visible = false
 	$Meatball.visible = false
 	$Throwing1.visible = false
+	$Throwing2.visible = false
+	$Throwing3.visible = false
 	match deathName:
 		"Fly":
 			$Fly.visible = true
@@ -29,6 +31,16 @@ func _ready():
 			$Throwing1.visible = true
 			$Throwing1/Throwing1Anim.play("die")
 			yield($Throwing1/Throwing1Anim, "animation_finished")
+			set_physics_process(false)
+		"Throwing2":
+			$Throwing2.visible = true
+			$Throwing2/Throwing2Anim.play("die")
+			yield($Throwing2/Throwing2Anim, "animation_finished")
+			set_physics_process(false)
+		"Throwing3":
+			$Throwing3.visible = true
+			$Throwing3/Throwing3Anim.play("die")
+			yield($Throwing3/Throwing3Anim, "animation_finished")
 			set_physics_process(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
