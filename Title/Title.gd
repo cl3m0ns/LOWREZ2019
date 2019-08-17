@@ -9,7 +9,6 @@ var nextScene = false
 func _ready():
 	$SnailPlayer.play("move")
 	$Chef1Anim.play("move")
-	$chef2Anim.play("move")
 	$meatballAnim.play("move")
 	$TransAnim.play("fade out")
 	pass # Replace with function body.
@@ -22,7 +21,7 @@ func _process(delta):
 	if $ClemTime.is_stopped() && nextScene:
 		$TransAnim.play("fade in")
 		yield(get_node("TransAnim"), "animation_finished")
-		get_tree().change_scene("res://Scenes/TestRoom.tscn")
+		get_tree().change_scene("res://Title/Intro.tscn")
 
 
 func _input(event):
@@ -40,7 +39,6 @@ func show_clemonades():
 	$Sprite1.visible = false
 	$Sprite2.visible = false
 	$Chef1.visible = false
-	$Chef2Anim.visible = false
 	$meatballsprite.visible = false
 	$Clemonades.visible = true
 	nextScene = true

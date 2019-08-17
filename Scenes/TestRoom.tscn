@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Tiles/Door_Right.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Door_Bot.tscn" type="PackedScene" id=2]
@@ -17,8 +17,9 @@
 [ext_resource path="res://Enemies/KnifeGuy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Enemies/ThrowingEnemy3.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Enemies/ThrowingEnemy.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Enemies/Boss.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=20]
 
 [node name="TestRoom" type="Node2D"]
 
@@ -129,14 +130,11 @@ position = Vector2( 82, 115 )
 [node name="Meatball4" parent="." instance=ExtResource( 12 )]
 position = Vector2( 242, 213 )
 
-[node name="Meatball5" parent="." instance=ExtResource( 12 )]
-position = Vector2( 291, 142 )
-
 [node name="Meatball2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 81, 229 )
 
 [node name="Meatball3" parent="." instance=ExtResource( 12 )]
-position = Vector2( 304, 83 )
+position = Vector2( 280, 154 )
 
 [node name="Fly" parent="." instance=ExtResource( 13 )]
 position = Vector2( 113, 22 )
@@ -183,12 +181,15 @@ position = Vector2( 174, 114 )
 [node name="Fly5" parent="." instance=ExtResource( 13 )]
 position = Vector2( 218, 242 )
 
+[node name="Boss" parent="." instance=ExtResource( 18 )]
+position = Vector2( 289, 24 )
+
 [node name="Fly6" parent="." instance=ExtResource( 13 )]
 position = Vector2( 283, 180 )
 
-[node name="Player" parent="." instance=ExtResource( 18 )]
-position = Vector2( 31, 41 )
+[node name="Player" parent="." instance=ExtResource( 19 )]
+position = Vector2( 290, 96 )
 
-[node name="Camera" parent="." instance=ExtResource( 19 )]
+[node name="Camera" parent="." instance=ExtResource( 20 )]
 position = Vector2( 0, 64 )
 current = true
