@@ -60,6 +60,7 @@ func do_state():
 	if hp <= 0:
 		$CollisionShape2D.disabled = true
 		$Hitbox/CollisionShape2D.disabled = true
+		$StateTimer.stop()
 		do_death()
 	
 	match state:

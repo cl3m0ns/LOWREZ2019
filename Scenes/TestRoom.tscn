@@ -168,14 +168,14 @@ position = Vector2( 223, 134 )
 [node name="ThrowingEnemy9" parent="." instance=ExtResource( 17 )]
 position = Vector2( 265, 73 )
 
-[node name="ThrowingEnemy13" parent="." instance=ExtResource( 17 )]
-position = Vector2( 276, 73 )
-
 [node name="ThrowingEnemy10" parent="." instance=ExtResource( 17 )]
-position = Vector2( 312, 73 )
+position = Vector2( 275, 73 )
 
 [node name="ThrowingEnemy12" parent="." instance=ExtResource( 17 )]
-position = Vector2( 301, 73 )
+position = Vector2( 300, 73 )
+
+[node name="ThrowingEnemy13" parent="." instance=ExtResource( 17 )]
+position = Vector2( 311, 73 )
 
 [node name="ThrowingEnemy7" parent="." instance=ExtResource( 17 )]
 position = Vector2( 150, 197 )
@@ -192,9 +192,6 @@ position = Vector2( 73, 209 )
 [node name="Fly2" parent="." instance=ExtResource( 14 )]
 position = Vector2( 174, 114 )
 
-[node name="Fly9" parent="." instance=ExtResource( 14 )]
-position = Vector2( 288, 85 )
-
 [node name="Fly5" parent="." instance=ExtResource( 14 )]
 position = Vector2( 213, 244 )
 
@@ -207,11 +204,14 @@ position = Vector2( 296, 182 )
 [node name="Fly8" parent="." instance=ExtResource( 14 )]
 position = Vector2( 290, 148 )
 
+[node name="Fly9" parent="." instance=ExtResource( 14 )]
+position = Vector2( 288, 85 )
+
 [node name="Player" parent="." instance=ExtResource( 20 )]
-position = Vector2( 24, 114.229 )
+position = Vector2( 33, 111.5 )
 
 [node name="Camera" parent="." instance=ExtResource( 21 )]
-position = Vector2( 0, 63.5 )
+position = Vector2( 0, 64 )
 current = true
 
 [node name="Pause" parent="." instance=ExtResource( 22 )]
