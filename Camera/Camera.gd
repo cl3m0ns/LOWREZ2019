@@ -30,7 +30,7 @@ func _process(delta):
 func update_hp():
 	var player = get_parent().get_node("Player")
 	var hp = player.hp
-	if currentHp < hp:
+	if currentHp < hp && !GLOBAL.SOUND_OFF:
 		$HpAudio.play()
 	currentHp = hp
 	

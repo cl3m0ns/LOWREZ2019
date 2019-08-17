@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/TestRoom.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Door_Right.tscn" type="PackedScene" id=2]
@@ -21,7 +21,8 @@
 [ext_resource path="res://Enemies/Boss.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Sounds/FunnyPolka-FULL.wav" type="AudioStream" id=22]
+[ext_resource path="res://Pause.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Sounds/FunnyPolka-FULL.wav" type="AudioStream" id=23]
 
 [node name="TestRoom" type="Node2D"]
 script = ExtResource( 1 )
@@ -199,5 +200,8 @@ position = Vector2( 31, 106 )
 position = Vector2( 0, 64 )
 current = true
 
+[node name="Pause" parent="." instance=ExtResource( 22 )]
+z_index = 10
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 22 )
+stream = ExtResource( 23 )
