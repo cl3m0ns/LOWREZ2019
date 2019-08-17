@@ -12,6 +12,7 @@ func _ready():
 	$Chef1Anim.play("move")
 	$meatballAnim.play("move")
 	$TransAnim.play("fade out")
+	$ColorRect.visible = false
 	pass # Replace with function body.
 
 func _process(delta):
@@ -22,6 +23,7 @@ func _process(delta):
 	if $ClemTime.is_stopped() && nextScene:
 		$TransAnim.play("fade in")
 		yield(get_node("TransAnim"), "animation_finished")
+		$ColorRect.visible = true
 		get_tree().change_scene("res://Title/Intro.tscn")
 
 

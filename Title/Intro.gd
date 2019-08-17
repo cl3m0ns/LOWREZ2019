@@ -6,6 +6,7 @@ var nextScene = false
 
 func _ready():
 	$TransAnim.play("fade out")
+	$ColorRect.visible = false
 	pass # Replace with function body.
 
 func _process(delta):

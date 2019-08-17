@@ -1,7 +1,6 @@
 extends KinematicBody2D
 var TYPE = "BOSS"
-const SPEED = 20
-
+const SPEED = 30
 var moveDir = Vector2.RIGHT
 var oldDir = Vector2.ZERO
 var knockDir = Vector2.ZERO
@@ -12,10 +11,9 @@ enum {
 	MOVE,
 	ATTACK
 }
-var hp = 10
+var hp = 20
 var player = null
 var attackStart = false
-var canBeHurt = true
 var state = IDLE
 var stateChooser = [IDLE, JUMP]
 var deathName = "Boss"
@@ -59,19 +57,20 @@ func damage_loop():
 		canDamage -= 1
 
 func do_state():
+	if hp <= 0:
+		$CollisionShape2D.disabled = true
+		$Hitbox/CollisionShape2D.disabled = true
+		do_death()
+	
 	match state:
 		IDLE:
-			canBeHurt = true
 			$AnimationPlayer.play('idle')
 		JUMP:
-			canBeHurt = false
 			jump()
 		MOVE:
 			collision_mask
-			canBeHurt = false
 			move()
 		ATTACK:
-			canBeHurt = false
 			attack()
 
 func attack():
@@ -116,6 +115,7 @@ func take_damage():
 		if !GLOBAL.SOUND_OFF:
 			$HurtAudio.play()
 		if hp <= 0:
+			$DeadTimer.start()
 			do_death()
 
 func do_death():
@@ -123,15 +123,15 @@ func do_death():
 	var boom = bloodSplatter.instance()
 	boom.set_position(position)
 	get_parent().add_child(boom)
-	var dead = death.instance()
-	dead.set_position(position)
-	dead.deathName = "Boss"
-	get_parent().get_node("DeadEnemies").add_child(dead)
-	GLOBAL.BOSS_ROOM = false
-	get_tree().change_scene("res://Title/Win.tscn")
-	queue_free()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "land":
 		state = IDLE
 		$StateTimer.wait_time = choose([1.25, 1.5, 1.75])
+
+
+func _on_DeadTimer_timeout():
+	GLOBAL.BOSS_ROOM = false
+	get_tree().change_scene("res://Title/Win.tscn")
+	queue_free()
+	pass # Replace with function body.

@@ -141,11 +141,11 @@ position = Vector2( -7, -74 )
 texture = ExtResource( 2 )
 centered = false
 hframes = 21
-frame = 20
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
-position = Vector2( 0, -1 )
+position = Vector2( 0, -10 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -160,6 +160,7 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 5 )
+disabled = true
 
 [node name="StateTimer" type="Timer" parent="."]
 process_mode = 0
@@ -171,6 +172,11 @@ wait_time = 4.0
 
 [node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="DeadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="DeadTimer" to="." method="_on_DeadTimer_timeout"]
