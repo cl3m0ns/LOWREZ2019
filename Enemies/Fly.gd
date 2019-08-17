@@ -113,6 +113,7 @@ func take_damage():
 	if iframes == 0:
 		iframes = 15
 		hp -= 1
+		$HurtAudio.play()
 		if hp <= 0:
 			do_death()
 		else:

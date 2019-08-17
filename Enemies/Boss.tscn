@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemies/Boss.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/boss.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Hit_hurt 1.wav" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 5 )
 
 [sub_resource type="Animation" id=2]
@@ -145,7 +146,7 @@ frame = 20
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 position = Vector2( 0, -1 )
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )
@@ -167,6 +168,9 @@ autostart = true
 [node name="AttackTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 4.0
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

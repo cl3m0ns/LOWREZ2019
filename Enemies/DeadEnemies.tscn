@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Enemies/DeadEnemies.gd" type="Script" id=1]
-[ext_resource path="res://Enemies/flythingy.png" type="Texture" id=2]
-[ext_resource path="res://Enemies/enemy1.png" type="Texture" id=3]
-[ext_resource path="res://Enemies/meatball.png" type="Texture" id=4]
-[ext_resource path="res://Enemies/enemy2.png" type="Texture" id=5]
-[ext_resource path="res://Enemies/enemy2-2.png" type="Texture" id=6]
-[ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=7]
+[ext_resource path="res://Sounds/Explosion 1.wav" type="AudioStream" id=2]
+[ext_resource path="res://Enemies/flythingy.png" type="Texture" id=3]
+[ext_resource path="res://Enemies/enemy1.png" type="Texture" id=4]
+[ext_resource path="res://Enemies/meatball.png" type="Texture" id=5]
+[ext_resource path="res://Enemies/enemy2.png" type="Texture" id=6]
+[ext_resource path="res://Enemies/enemy2-2.png" type="Texture" id=7]
+[ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "die"
@@ -107,11 +108,14 @@ tracks/0/keys = {
 [node name="DeadEnemies" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="DieAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+
 [node name="Fly" type="Node2D" parent="."]
 visible = false
 
 [node name="FlySprite" type="Sprite" parent="Fly"]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 hframes = 8
 frame = 7
 
@@ -122,7 +126,7 @@ anims/die = SubResource( 1 )
 visible = false
 
 [node name="KnifeGuySprite" type="Sprite" parent="KnifeGuy"]
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 hframes = 14
 frame = 13
 
@@ -133,7 +137,7 @@ anims/die = SubResource( 2 )
 visible = false
 
 [node name="MeatballSprite" type="Sprite" parent="Meatball"]
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 hframes = 10
 frame = 9
 
@@ -145,7 +149,7 @@ editor/display_folded = true
 visible = false
 
 [node name="Throwing1Sprite" type="Sprite" parent="Throwing1"]
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 hframes = 11
 frame = 10
 
@@ -156,7 +160,7 @@ anims/die = SubResource( 4 )
 editor/display_folded = true
 
 [node name="Throwing2Sprite" type="Sprite" parent="Throwing2"]
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 hframes = 11
 frame = 10
 
@@ -166,7 +170,7 @@ anims/die = SubResource( 5 )
 [node name="Throwing3" type="Node2D" parent="."]
 
 [node name="Throwing3Sprite" type="Sprite" parent="Throwing3"]
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 hframes = 11
 
 [node name="Throwing3Anim" type="AnimationPlayer" parent="Throwing3"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enemies/KnifeGuy.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/enemy1.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Hit_hurt 1.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.50971, 2.94723 )
@@ -105,4 +106,8 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 4 )
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+attenuation = 0.31864
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

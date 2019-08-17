@@ -69,6 +69,7 @@ func take_damage():
 		iframes = 15
 		hp -= 1
 		get_parent().get_node("Camera").update_hp()
+		$HurtAudio.play()
 		if hp <= 0:
 			NEXT_STATE = KNOCKBACK
 			do_death()
@@ -172,6 +173,7 @@ func attack_loop():
 	
 	#add to scene
 	get_parent().add_child(myBullet)
+	$ShootAudio.play()
 	#start timer
 	$ShootTimer.start()
 

@@ -59,6 +59,7 @@ func do_bullet():
 	myBullet.set_position(bulletPos)
 	
 	#add to scene
+	$ShootAudio.play()
 	get_parent().add_child(myBullet)
 
 func do_attack():
@@ -81,6 +82,7 @@ func take_damage():
 	if iframes == 0:
 		iframes = 15
 		hp -= 1
+		$HurtAudio.play()
 		if hp <= 0:
 			do_death()
 

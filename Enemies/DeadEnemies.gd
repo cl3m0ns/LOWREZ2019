@@ -4,6 +4,7 @@ var deathName = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$DieAudio.play()
 	set_z_index(1)
 	$Fly.visible = false
 	$KnifeGuy.visible = false

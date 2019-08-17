@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enemies/Meatball.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/meatball.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Hit_hurt 1.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 1 )
@@ -69,4 +70,9 @@ shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+attenuation = 0.0669858
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

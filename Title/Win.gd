@@ -15,7 +15,7 @@ func _process(delta):
 	if nextScene:
 		$TransAnim.play("fade in")
 		yield(get_node("TransAnim"), "animation_finished")
-		get_tree().change_scene("res://Title/Title.tscn")
+		get_tree().change_scene("res://Title/endCredits1.tscn")
 
 
 func _input(event):

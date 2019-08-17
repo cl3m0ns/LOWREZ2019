@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Heart_Pickup.gd" type="Script" id=1]
 [ext_resource path="res://Player/hp_pickup.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Powerup 4.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.20495, 2.82421 )
@@ -29,3 +30,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0.228584 )
 texture = ExtResource( 2 )
+
+[node name="PickupAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

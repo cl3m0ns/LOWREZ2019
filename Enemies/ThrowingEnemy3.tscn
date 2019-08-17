@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemies/ThrowingEnemy3.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/enemy2-1.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Hit_hurt 1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/Laser_shoot 1.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.75964, 1.4668 )
@@ -72,5 +74,11 @@ shape = SubResource( 4 )
 [node name="StateTimer" type="Timer" parent="."]
 process_mode = 0
 autostart = true
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_StateTimer_timeout"]

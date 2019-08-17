@@ -7,6 +7,7 @@ var origBgPos = Vector2(0, 32)
 var nextScene = false
 
 func _ready():
+	$AudioStreamPlayer2D.play()
 	$SnailPlayer.play("move")
 	$Chef1Anim.play("move")
 	$meatballAnim.play("move")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/snail hero.png" type="Texture" id=2]
 [ext_resource path="res://Player/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://Sounds/Laser_shoot 1.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/Hit_hurt 4.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 2 )
@@ -153,7 +155,7 @@ __meta__ = {
 "anims/Walk Side" = SubResource( 7 )
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 0.5
 one_shot = true
 
 [node name="DeathBoom" type="CPUParticles2D" parent="."]
@@ -183,3 +185,9 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -0.5 )
 shape = SubResource( 8 )
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
