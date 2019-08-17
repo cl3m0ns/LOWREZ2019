@@ -13,6 +13,5 @@ func _physics_process(delta):
 		if body.get("TYPE") == "PLAYER":
 			if body.hp != body.maxHp:
 				body.hp += 1
-				$PickupAudio.play()
-				get_parent().find_node("Camera").update_hp()
+				GLOBAL.UPDATE_HP = true
 				queue_free()

@@ -89,7 +89,6 @@ func move():
 	var playerPos = player.get_global_position()
 	var distToPlayer = flyPos.distance_to(playerPos); 
 	var moveDir = (playerPos - flyPos).normalized() * SPEED
-	print(distToPlayer)
 	if distToPlayer < 2:
 		attackStart = true
 		state = ATTACK

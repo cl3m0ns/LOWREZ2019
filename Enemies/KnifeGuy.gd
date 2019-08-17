@@ -116,7 +116,6 @@ func move_to_player():
 	var playerPos = player.get_global_position()
 	var distToPlayer = get_global_position().distance_to(playerPos); 
 	var  moveDir = (playerPos - position).normalized() * SPEED
-	print(distToPlayer)
 	if distToPlayer < 12:
 		state = ATTACK
 	flip_sprite_to_player()

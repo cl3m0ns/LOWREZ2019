@@ -41,7 +41,6 @@ func explode():
 func damage_loop():
 	for body in $Hitbox.get_overlapping_bodies():
 		if body.get("TYPE") == "PLAYER" && canHurt:
-			print("hurting someone")
 			body.knockDir = body.get_global_position() - get_global_position()
 			body.take_damage()
 			canHurt = false

@@ -4,6 +4,7 @@ var map_seed = 0
 
 var DOORS_HIDDEN = true
 var BOSS_ROOM = false
+var UPDATE_HP = false
 
 func _ready():
 	randomize()
