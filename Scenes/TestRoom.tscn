@@ -24,6 +24,7 @@
 [node name="TestRoom" type="Node2D"]
 
 [node name="Doors" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Door_Right" parent="Doors" instance=ExtResource( 1 )]
 position = Vector2( 124, 89 )
@@ -122,7 +123,7 @@ texture = ExtResource( 10 )
 [node name="DeadEnemies" type="Node" parent="."]
 
 [node name="Heart" parent="." instance=ExtResource( 11 )]
-position = Vector2( 243, 119 )
+position = Vector2( 237, 117 )
 
 [node name="Meatball" parent="." instance=ExtResource( 12 )]
 position = Vector2( 82, 115 )
@@ -188,7 +189,7 @@ position = Vector2( 289, 24 )
 position = Vector2( 283, 180 )
 
 [node name="Player" parent="." instance=ExtResource( 19 )]
-position = Vector2( 290, 96 )
+position = Vector2( 291, 96 )
 
 [node name="Camera" parent="." instance=ExtResource( 20 )]
 position = Vector2( 0, 64 )

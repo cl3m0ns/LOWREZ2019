@@ -17,4 +17,5 @@
 [node name="Floor" type="TileMap"]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
+collision_mask = 0
 format = 1

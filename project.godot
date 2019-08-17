@@ -79,6 +79,16 @@ move_down={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Bullets"
+2d_physics/layer_5="EnemyBullets"
+2d_physics/layer_6="Boss"
+2d_physics/layer_7="Pickups"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
