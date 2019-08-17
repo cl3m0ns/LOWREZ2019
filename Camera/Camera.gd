@@ -42,15 +42,18 @@ func disable_enemies():
 	var collisions = $Area.get_overlapping_bodies()
 	
 	for i in collisions:
-		if i.get("TYPE") == "ENEMY":
+		if i.get("TYPE") == "ENEMY" || i.get("TYPE") == "BOSS":
 			i.set_physics_process(false)
 
 func check_for_enemies():
 	var collisions = $Area.get_overlapping_bodies()
 	
 	var showDoors = false
+	if GLOBAL.BOSS_ROOM == true:
+		showDoors = true
+		
 	for i in collisions:
-		if i.get("TYPE") == "ENEMY":
+		if i.get("TYPE") == "ENEMY" || i.get("TYPE") == "BOSS":
 			showDoors = true
 	
 	if GLOBAL.DOORS_HIDDEN && showDoors:
@@ -87,3 +90,6 @@ func move_player_into_room():
 func body_entered(body):
 	if body.get("TYPE") == "ENEMY"|| body.get("TYPE") == "PICKUP":
 		body.set_physics_process(true)
+	if body.get("TYPE") == "BOSS":
+		body.set_physics_process(true)
+		GLOBAL.BOSS_ROOM = true

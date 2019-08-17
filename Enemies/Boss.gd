@@ -1,5 +1,5 @@
 extends KinematicBody2D
-var TYPE = "ENEMY"
+var TYPE = "BOSS"
 const SPEED = 20
 
 var moveDir = Vector2.RIGHT
@@ -10,11 +10,12 @@ enum {
 	IDLE,
 	JUMP,
 	MOVE,
-	LAND
+	ATTACK
 }
-var hp = 30
+var hp = 10
 var player = null
-
+var attackStart = false
+var canBeHurt = true
 var state = IDLE
 var stateChooser = [IDLE, JUMP]
 var deathName = "Boss"
@@ -47,7 +48,7 @@ func _physics_process(delta):
 	damage_loop()
 
 func damage_loop():
-	if canDamage == 0 && state != MOVE && state != JUMP:
+	if canDamage == 0:
 		for body in $Hitbox.get_overlapping_areas():
 			if body.get("TYPE") == "PLAYER_HITBOX":
 				var player = body.get_parent()
@@ -60,20 +61,38 @@ func damage_loop():
 func do_state():
 	match state:
 		IDLE:
-			pass
+			canBeHurt = true
+			$AnimationPlayer.play('idle')
 		JUMP:
+			canBeHurt = false
 			jump()
 		MOVE:
+			collision_mask
+			canBeHurt = false
 			move()
+		ATTACK:
+			canBeHurt = false
+			attack()
+
+func attack():
+	if $AnimationPlayer.current_animation != "land" && attackStart == true:
+		attackStart = false
+		$AnimationPlayer.play("land")
 
 func jump():
 	if $AnimationPlayer.current_animation != "jump" && $AnimationPlayer.current_animation != "":
+		#first time we hit jump
 		$AnimationPlayer.play("jump")
 
 func move():
 	var flyPos = $Hitbox.get_global_position()
 	var playerPos = player.get_global_position()
+	var distToPlayer = flyPos.distance_to(playerPos); 
 	var moveDir = (playerPos - flyPos).normalized() * SPEED
+	print(distToPlayer)
+	if distToPlayer < 2:
+		attackStart = true
+		state = ATTACK
 	move_and_slide(moveDir, Vector2.ZERO)
 
 func choose(array):
@@ -107,5 +126,11 @@ func do_death():
 	dead.set_position(position)
 	dead.deathName = "Boss"
 	get_parent().get_node("DeadEnemies").add_child(dead)
+	GLOBAL.BOSS_ROOM = false
 	get_tree().change_scene("res://Title/Win.tscn")
 	queue_free()
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "land":
+		state = IDLE
+		$StateTimer.wait_time = choose([1.25, 1.5, 1.75])

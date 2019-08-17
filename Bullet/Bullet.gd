@@ -46,3 +46,9 @@ func damage_loop():
 			body.take_damage()
 			canHurt = false
 			explode_and_die()
+		if body.get("TYPE") == "BOSS" && canHurt && body.get("canBeHurt") == true:
+			print("hurting someone")
+			body.knockDir = body.get_global_position() - get_global_position()
+			body.take_damage()
+			canHurt = false
+			explode_and_die()

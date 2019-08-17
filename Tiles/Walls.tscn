@@ -444,6 +444,6 @@ points = PoolVector2Array( 60, 37, 64, 37, 64, 64, 37, 64, 37, 61, 60, 61 )
 
 [node name="Walls" type="TileMap"]
 tile_set = SubResource( 33 )
-collision_mask = 126
+collision_mask = 94
 format = 1
 tile_data = PoolIntArray( 60, 2, 0, 2424892, 4, 0, 3997700, 3, 0 )
